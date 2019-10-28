@@ -1,115 +1,119 @@
-![Parity Fether](https://wiki.parity.io/images/logo-parity-fether.jpg)
+<p align="center">
+  <img src="packages/fether-electron/build/icons/512.png" alt="Parity Fether" width="160">
+</p>
 
 # Parity Fether - a decentralised, light client-based wallet
 
-## [» Download the latest release «](https://github.com/paritytech/fether/releases)
-
+## [» Download the latest release «](https://github.com/parityfether/fether/releases)
 
 ---
 
 ## About Parity Fether
 
-Parity Fether aims to be the lightest and simplest decentralized wallet. It supports Ether and ERC-20 tokens, and runs on top of [Parity Ethereum](https://github.com/paritytech/parity-ethereum) light client. This allows smooth synchronization and interaction with the Ethereum blockchain, in a decentralized manner.
+Parity Fether is a lightweight, decentralised desktop wallet designed for managing Ether (ETH) and ERC-20 tokens.
 
-By default, Fether will launch its embedded Parity Ethereum light client. You can also separately launch your Ethereum client and Fether will automatically connect to it, as described in the [Fether FAQ](https://wiki.parity.io/Fether-FAQ#how-to-launch-fether-with-a-separately-launched-parity-ethereum-node).
+The wallet uses a light-client architecture to interact with the Ethereum blockchain without requiring users to run a full node. It provides a simple desktop interface for managing accounts, checking balances, and sending and receiving transactions.
 
-Parity Fether interacts with the light node using [`@parity/light.js`](https://github.com/paritytech/js-libs/tree/master/packages/light.js), a Javascript library specifically crafted for wallets to connect with light clients. 
+Parity Fether can launch its embedded Ethereum light client or connect to a separately running compatible client, offering flexibility in how users access the network.
 
-Parity Fether is licensed under the BSD 3-Clause, and can be used for all your Ethereum needs.
+For questions, bug reports, or feature requests, use the [GitHub Issues](https://github.com/parityfether/fether/issues) page.
 
-If you run into problems while using Parity Fether, first check out the [FAQ](https://wiki.parity.io/Fether-FAQ) on our wiki and feel free to file an issue in this repository or hop on our [Gitter](https://gitter.im/paritytech/fether) or [Riot](https://riot.im/app/#/group/+parity:matrix.parity.io) chat rooms if you have any question. We are glad to help!  
-
-**For security-critical issues**, please refer to the security policy outlined in [SECURITY.md](https://github.com/paritytech/parity/blob/master/SECURITY.md).
+Parity Fether is distributed under the BSD 3-Clause License; see [LICENSE](LICENSE).
 
 ---
 
-## Screenshots
-
-![Parity Fether](https://wiki.parity.io/images/fether-screenshot-0.jpg)
-
-
-## Join the chat!
-
-Get in touch with us on Gitter:
-[![Gitter](https://img.shields.io/badge/Gitter-Fether-brightgreen.svg)](https://gitter.im/paritytech/fether)
-
-Official website: https://parity.io | Be sure to check out [our Wiki](https://wiki.parity.io) for more information.
-
 ## Install and start Parity Fether using binaries
 
+Check the [Releases](https://github.com/parityfether/fether/releases) page for published versions and downloadable assets. Available formats depend on the release.
+
 ### Mac
-- Download the [`.dmg` file](https://github.com/paritytech/fether/releases).
-- Double click on it to install Fether.
+
+1. Download a `.dmg` file from [Releases](https://github.com/parityfether/fether/releases), when available.
+2. Open the file and install Parity Fether.
+3. Launch Parity Fether from Applications.
 
 ### Windows
-- Download the [`.exe` file](https://github.com/paritytech/fether/releases).
-- Double click on it to install Fether.
-- Fether will be added to the program menu.
+
+1. Download a `.exe` installer from [Releases](https://github.com/parityfether/fether/releases), when available.
+2. Run the installer.
+3. Launch Fether from the Start menu.
 
 ### Linux
 
-  #### Using the AppImage (any distro)
-  - Download the [`.AppImage` file](https://github.com/paritytech/fether/releases).
-  - Make it executable `chmod +x /path/to/fether-x.x.x-x86_64.AppImage`.
-  - Launch it `/path/to/fether-x.x.x-x86_64.AppImage`.
-  
-  #### Using the binary (any distro)
-  - Download the [`.tar.xz` file](https://github.com/paritytech/fether/releases).
-  - Unarchive it `tar xf fether-x.x.x.tar.xz`.
-  - Launch it `./fether-x.x.x/fether`.
-  
-  #### Debian installer (Ubuntu, Linux Mint..)
-  - Download the [`.deb` file](https://github.com/paritytech/fether/releases).
-  - Double click on the file to install Fether.
-  - Fether will be added to the program menu.
+#### Using the AppImage (any compatible distribution)
+
+1. Download an `.AppImage` from [Releases](https://github.com/parityfether/fether/releases), when available.
+2. Make it executable and launch it:
+
+```bash
+chmod +x ./fether-*.AppImage
+./fether-*.AppImage
+```
+
+#### Using the binary archive
+
+1. Download a `.tar.xz` archive, when available.
+2. Extract it and run the executable from the extracted directory:
+
+```bash
+tar xf fether-*.tar.xz
+```
+
+#### Debian installer (Ubuntu, Linux Mint and compatible distributions)
+
+1. Download a `.deb` package, when available.
+2. Install it using your package manager or graphical package installer.
+3. Launch Fether from your applications menu.
+
+---
+
+## Security warning
+
+### Don't run Fether as root
+
+Avoid running Fether as root or with elevated privileges. Wallet software should be run with only the permissions it requires.
+
+### Beware of suspicious AppImage `.home` symlinks
+
+An AppImage can use a matching `.home` file or directory as its home directory. A malicious symlink named like `fether-x.y.z-x86_64.AppImage.home` could redirect application data to an unexpected location. Check unfamiliar files and symlinks before launching an AppImage.
+
+Use trusted release assets and take appropriate precautions when handling wallet credentials and funds.
+
+---
 
 ## Build from sources
 
 ### Install dependencies
 
+You will need Git, Node.js, Yarn and the native build tools required by your operating system. This codebase uses an older JavaScript toolchain; choose Node.js and Yarn versions compatible with its dependencies rather than assuming the latest versions will work.
+
 #### Mac
 
-Install Xcode Command Line Tools, NVM, Node.js latest LTS, Yarn, and Git
+Install the Xcode Command Line Tools:
 
 ```bash
-xcode-select --install;
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash;
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-echo -e "Installing Node.js latest LTS version";
-nvm install --lts
-echo -e "Switching to use Node.js latest LTS version";
-nvm use --lts;
-brew install yarn --without-node;
-brew install git --verbose;
-brew upgrade git --verbose;
+xcode-select --install
 ```
 
-#### Linux and Windows (Git Bash)
+Install Node.js, Yarn and Git using your preferred package managers.
 
-Install Node.js 10.x, Yarn, Git, and increase amount of inotify watchers
+#### Linux
 
-```bash
-sudo apt update;
-sudo apt install -y git nodejs npm curl;
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -;
-apt-get install -y nodejs;
-sudo ln -s /usr/bin/nodejs /usr/bin/node;
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -;
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list;
-sudo apt-get update && sudo apt-get install yarn;
-sudo ln -s /usr/bin/yarn /usr/local/bin/yarn;
-yarn global add windows-build-tools;
-```
+Install Git, Node.js, Yarn and your distribution's native build dependencies. Depending on your distribution, additional libraries may be required for Electron packaging.
+
+#### Windows
+
+Install Git, Node.js, Yarn and the native build tools needed by the project's dependencies. Use PowerShell or a compatible shell for the commands below.
 
 ### Clone this repo
 
 ```bash
-git clone https://github.com/paritytech/fether
-cd ./fether
+git clone https://github.com/parityfether/fether.git
+cd fether
 yarn install
 ```
+
+The `postinstall` script runs `yarn fetch-parity` to obtain the Parity Ethereum client used by the application.
 
 ### Build and run
 
@@ -118,6 +122,8 @@ yarn install
 ```bash
 yarn electron
 ```
+
+The `electron` script automatically invokes the project build before launching the Electron application.
 
 #### Build binaries
 
@@ -131,51 +137,72 @@ yarn package
 yarn start
 ```
 
+#### Run tests
+
+```bash
+yarn test
+```
+
+---
+
 ## Build binaries for production
 
-### General Notes:
+### General notes
 
-1) Alternative to `yarn; yarn build; DEBUG=electron-builder yarn release --mac;` is to just run `yarn package` and then run the `open "./packages/fether-electron/dist/mac/Parity Fether.app"` (i.e. no need to install)
+The repository uses Yarn and Lerna to build its packages. Production packaging is handled by the Electron package scripts. Platform-specific builds may require the corresponding operating system and signing configuration.
 
-2) Publishing a new release to GitHub is performed by a maintainer of the repository. In this case you need to obtain the `GH_TOKEN` from GitHub settings and add it using `export GH_TOKEN="..."` to ~/.bashrc and then run `source ~/.bashrc`. If you get an error that the `GH_TOKEN` is missing and you are only building the binary but not publishing, then just ignore the error.
+Build the packages:
+
+```bash
+yarn build
+```
+
+Package the application:
+
+```bash
+yarn package
+```
+
+The desktop package output is generated under `packages/fether-electron/dist/` when packaging succeeds.
 
 ### Mac
 
-Build and run binaries (i.e. .dmg) for production on Mac of a specific remote branch
+To run the platform-specific release build on macOS:
 
 ```bash
-git fetch origin INSERT_BRANCH_NAME:INSERT_BRANCH_NAME;
-git checkout INSERT_BRANCH_NAME;
-rm -rf ./packages/fether-electron/dist/
-rm -rf /Applications/Parity\ Fether.app/
-yarn; yarn build; DEBUG=electron-builder yarn release --mac;
-open ./packages/fether-electron/dist/Parity\ Fether-0.3.0.dmg
+yarn build
+cd packages/fether-electron
+yarn release --mac
 ```
 
 ### Linux
 
-Build and run binaries (i.e. .deb) for production on Linux
-
-> Note: If you want to save time building, then first edit electron-builder.json so that it only builds a single binary like .deb instead of all of them
+To run the platform-specific release build on Linux:
 
 ```bash
-sudo rm -rf /opt/Parity\ Fether;
-rm -rf ~/.config/Electron;
-rm -rf ~/.config/fether;
-rm -rf ./packages/fether-electron/dist/;
-sudo rm /usr/local/bin/fether;
-sudo apt remove -y fether;
-yarn; yarn build; DEBUG=electron-builder yarn release --linux
-sudo apt install -y ./packages/fether-electron/dist/fether_0.3.0_amd64.deb
-fether
+yarn build
+cd packages/fether-electron
+yarn release --linux
 ```
 
 ### Windows
 
-Build and run binaries (i.e. .exe) binary for production on Windows
+To run the platform-specific release build on Windows:
 
 ```bash
-rm -rf /packages/fether-electron/dist;
-yarn; yarn build; DEBUG=electron-builder yarn release --win;
-./packages/fether-electron/dist/Parity\ Fether-0.3.0.exe
+yarn build
+cd packages/fether-electron
+yarn release --win
 ```
+
+Release commands may require additional configuration or credentials when publishing artifacts. For local builds, prefer `yarn package` unless a platform-specific release task is needed.
+
+---
+
+## Releases
+
+Source versions and any published installation packages can be found on the [GitHub Releases](https://github.com/parityfether/fether/releases) page.
+
+## License
+
+Parity Fether is licensed under the [BSD 3-Clause License](LICENSE).
